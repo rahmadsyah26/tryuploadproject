@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+    <form action="save" method="post">
+        <table>
+            <tr>
+                <td><label for="user-name">User Name</label></td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+
+    <form action="dataview" method="post">
+        <input type="submit" value = "View Data">
+    </form>
+</body>
+</html>
