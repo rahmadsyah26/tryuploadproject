@@ -18,9 +18,16 @@ public class UserController {
     @Autowired
     UserRepository repository;
 
+//    @RequestMapping("/")
+//    public String index(){
+//        return "index";
+//    }
+
     @RequestMapping("/")
-    public String index(){
-        return "index";
+    public ModelAndView index(@ModelAttribute User user){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("index");
+        return mv;
     }
 
     @RequestMapping(value = "/findall", method = RequestMethod.GET)
