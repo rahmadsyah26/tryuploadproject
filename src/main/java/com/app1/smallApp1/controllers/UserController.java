@@ -44,6 +44,13 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping("/form")
+    public ModelAndView form(@ModelAttribute User user){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("form");
+        return mv;
+    }
+
     @RequestMapping("/dataview")
     public ModelAndView dataview(@ModelAttribute User user){
         ModelAndView mv = new ModelAndView();
