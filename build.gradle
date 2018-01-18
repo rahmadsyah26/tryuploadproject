@@ -21,7 +21,10 @@ sourceCompatibility = 1.8
 repositories {
 	mavenCentral()
 }
-
+bootRun {
+	//jvmArgs = ["-XX:PermSize=256m", "-XX:MaxPermSize=512m", "-Xmx2048m", "-Dserver.port=8081"]
+	addResources = true
+}
 
 dependencies {
 //	compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -36,6 +39,7 @@ dependencies {
 
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version:'1.4.0.RELEASE'
 	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version:'1.9.21'   //untuk html di properties
+	compile("org.springframework.boot:spring-boot-devtools") //untuk update html dan css tanpa compile ulang
 	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.4.0.RELEASE'){
 		exclude(module: 'commons-logging')
 	}

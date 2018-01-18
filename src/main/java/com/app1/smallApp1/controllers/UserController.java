@@ -4,10 +4,8 @@ import com.app1.smallApp1.models.User;
 import com.app1.smallApp1.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.jws.WebParam;
@@ -16,7 +14,7 @@ import javax.jws.WebParam;
 public class UserController {
 
     @Autowired
-    UserRepository repository;
+    private UserRepository userRepository;
 
 //    @RequestMapping("/")
 //    public String index(){
@@ -24,10 +22,13 @@ public class UserController {
 //    }
 
     @RequestMapping("/")
-    public ModelAndView index(@ModelAttribute User user){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
-        return mv;
+//    public ModelAndView index(@ModelAttribute User user){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("index");
+//        return mv;
+//    }
+    String index(){
+        return "index";
     }
 
     @RequestMapping(value = "/findall", method = RequestMethod.GET)
@@ -55,6 +56,35 @@ public class UserController {
     public ModelAndView dataview(@ModelAttribute User user){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("dataview");
+        return mv;
+    }
+
+    //Mengambil data dari db
+    @RequestMapping("/all")
+    public @ResponseBody Iterable<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    //save to database dengan fungsi get
+    @RequestMapping("/add")
+    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email){
+        User x = new User(name, email);
+        x.setName(name);
+        x.setEmail(email);
+        userRepository.save(x);
+        return "saved";
+    }
+
+    @RequestMapping("/findEmail")
+    public @ResponseBody Iterable<User> getByEmail(@RequestParam String email){
+        return userRepository.findByEmail(email);
+    }
+
+    @RequestMapping("/viewdb")
+    public ModelAndView viewDbData(@ModelAttribute User user){
+        ModelAndView mv = new ModelAndView("userview");
+        //mv.setViewName("userview");
+        mv.addObject("user", userRepository.findAll());
         return mv;
     }
 }
